@@ -11,5 +11,5 @@ export interface User{
     question:string,
     answer:string,
     state:boolean,
-    role: RoleTypesEnum
+    role_id: RoleTypesEnum
 }

@@ -16,7 +16,5 @@ export interface AuthRes {
 }
 
 export const loginService = (data:loginReq) =>{
-    console.log(data)
-
     return apiCall.post<any, AuthRes>('login',data)
 }

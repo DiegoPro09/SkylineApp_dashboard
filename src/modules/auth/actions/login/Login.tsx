@@ -29,8 +29,7 @@ export default function Login() {
         onSuccess:(res)=>{
             message.success('Ingresando..')
             setErr('')
-            setSuccess(true)
-            //console.log(res.data.data, res.data.user)
+            setSuccess(true) 
             setLoggedIn(res.data.data, res.data.user)
         },
         onError:(error)=>{

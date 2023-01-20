@@ -92,12 +92,16 @@ export const AuthProvider:React.FC<{children:React.ReactNode}> = ({children})=>{
     }
     
     const setLoggedIn = (token:string, user:User) => {
+        console.log(user.role_id)
+        console.log(token)
         setAuth(activateSession(token, user))
         {
-            //user.role === RoleTypesEnum.customer ? navifate(`${user.role}/admin`) : 
-            navifate(routesSuperAdmin.scores) 
-            //user.role === RoleTypesEnum.seller ? navifate(`${user.role}/admin`) : 
-            //navifate(publicRoutes.login)
+            user.role_id === RoleTypesEnum.superadmin ? navifate(routesSuperAdmin.scores) : 
+            user.role_id === RoleTypesEnum.admin ? navifate(`/signup`) : 
+            user.role_id === RoleTypesEnum.preceptor ? navifate(`/signup`) : 
+            user.role_id === RoleTypesEnum.teacher ? navifate(`/signup`) : 
+            user.role_id === RoleTypesEnum.user ? navifate(`/signup`) : 
+            navifate(publicRoutes.login)
         }
         
     } 
