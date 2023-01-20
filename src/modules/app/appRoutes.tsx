@@ -1,6 +1,7 @@
 import { Button } from "antd"
 import axios from "axios"
-import SignUp from "../auth/actions/SignUp"
+import Login from "../auth/actions/login/Login"
+import SignUp from "../auth/actions/signup/SignUp"
 
 export interface AppRoutes {
     path:string,
@@ -20,11 +21,7 @@ export const PUBLIC_ROUTES:AppRoutes[] = [
     {
         path:'/',
         name:'Login',
-        component:<>
-
-            <Button onClick={whow}>asd</Button>
-
-        </>
+        component: <Login/>
     },
     {
         path:'/signup',

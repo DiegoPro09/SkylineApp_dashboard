@@ -1,5 +1,5 @@
 import { AppRoutes } from "../app/appRoutes";
-import SignUp from "./actions/SignUp";
+import SignUp from "./actions/signup/SignUp";
 import { publicRoutes } from "./appRoutes";
 
 export const authRoutesPublic:AppRoutes[] =[
