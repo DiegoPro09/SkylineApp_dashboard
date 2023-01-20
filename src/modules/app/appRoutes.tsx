@@ -29,3 +29,11 @@ export const PUBLIC_ROUTES:AppRoutes[] = [
         component:<SignUp/>
     },
 ]
+
+export const PRIVATE_ROUTES:AppRoutes[] = [
+    {
+        path: '/superadmin/scores',
+        name: 'Scores',
+        component: <>NOTAS</>
+    }
+]

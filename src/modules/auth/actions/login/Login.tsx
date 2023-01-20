@@ -6,7 +6,8 @@ import { EyeInvisibleOutlined, EyeTwoTone, InfoCircleOutlined, LoadingOutlined }
 import '../signup/SignUp.css'
 import { validations } from '../../authValidations'
 import { useAction } from '../../../../shared/hooks/useAction'
-import { loginReq, loginService } from '../../services/loginService'
+import { AuthRes, loginReq, loginService } from '../../services/loginService'
+import { useAuthContext } from '../../AuthContext'
 
 export default function Login() {
     const labels = {
@@ -17,16 +18,20 @@ export default function Login() {
         vpassword: <div style={{color: 'white'}}>Confirme la contraseña</div>,
     }
 
+    const {setLoggedIn} = useAuthContext()
+
     const [err, setErr] = useState("")
     const [success, setSuccess] = useState(false)
 
-    const {action, isLoading} = useAction<loginReq>({
-        key:'signup',
+    const {action, isLoading} = useAction<loginReq, AuthRes>({
+        key:'login',
         fn:loginService,
         onSuccess:(res)=>{
             message.success('Ingresando..')
             setErr('')
             setSuccess(true)
+            //console.log(res.data.data, res.data.user)
+            setLoggedIn(res.data.data, res.data.user)
         },
         onError:(error)=>{
             message.error(error.message)
