@@ -14,12 +14,12 @@ export const authRoutesPublic:AppRoutes[] =[
         name:'signup',
         component:<SignUp/>
     },
-    {
+    /*{
         path: routesSuperAdmin.scores,
         name:'scores',
         component:<>NOTAS</>
     }
-    /*{
+    {
         path:'/lost-password',
         name:'Forgot password',
         component:<>forgot password</>

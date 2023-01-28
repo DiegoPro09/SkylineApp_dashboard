@@ -9,12 +9,11 @@ export interface loginReq {
 }
 
 export interface AuthRes {
-    data: {
-        data:string,
-        user: User
-    }
+    data:string,
+    user: User
 }
 
 export const loginService = (data:loginReq) =>{
-    return apiCall.post<any, AuthRes>('login',data)
+    console.log(data)
+    return apiCall.post<any, AuthRes>('login', data)
 }

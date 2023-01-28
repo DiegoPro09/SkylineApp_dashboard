@@ -37,13 +37,12 @@ export default function SignUp() {
             message.error(error.message)
             setErr(error.message) 
             setSuccess(false)
-            console.log(error.response.data.message)
         }
     })
     
     return (
         <>
-            <AuthCard logo={Logo}>
+            <AuthCard logo={Logo} style='100px'>
                 <Form className='CardForm' onFinish={action} autoComplete='on' layout="vertical" encType='x-www-form-urlencoded' >
                     <Row>
                         <Col span={12}>
@@ -104,13 +103,13 @@ export default function SignUp() {
                         </Col>
                     </Row>
                     
-                    { err && <Alert message={err} type="error" showIcon /> }
+                    { err && <> <Alert message={err} type="error" showIcon /><br/> </>  }
                     { success && <><Alert message={successMessage} type="success" showIcon />  <br/> </> }
-                    { success && <><Alert message={<a href='/'>Volver Atrás</a>} type="success" /> <br/> </> }
+                    { success && <Alert message={<a href='/'>Volver Atrás</a>} type="success" /> }
 
                     
 
-                    <Button disabled={isLoading} block type="primary" htmlType="submit" className="login-form-button">
+                    <Button disabled={isLoading} block type="primary" htmlType="submit" className="login-form-button" style={{ display: success ? 'none' : '' }}>
                         {isLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/> : 'Registrarse'}
                     </Button>
                 </Form>

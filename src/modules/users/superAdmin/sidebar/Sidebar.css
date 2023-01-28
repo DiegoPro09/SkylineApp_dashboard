@@ -1,0 +1,17 @@
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-menu-dark .ant-menu-item-selected {
+    background-color: #D75252 !important;
+    border-radius: 0;
+    width: 100%;
+    margin-left: 0px;
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-menu-dark:not(.ant-menu-horizontal).ant-menu-item:not(.ant-menu-item-selected):active{
+    background-color: #D75252 !important;
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-menu-dark .ant-menu-item-selected{
+    background-color: #D75252 !important;
+    border-radius: 0;
+    width: 100%;
+    margin-left: 0px;
+}

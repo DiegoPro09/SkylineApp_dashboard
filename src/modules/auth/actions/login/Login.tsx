@@ -27,22 +27,22 @@ export default function Login() {
         key:'login',
         fn:loginService,
         onSuccess:(res)=>{
-            message.success('Ingresando..')
+            message.success('Bienvenido!')
             setErr('')
             setSuccess(true) 
-            setLoggedIn(res.data.data, res.data.user)
+            setLoggedIn(res.data, res.user)
         },
         onError:(error)=>{
+            console.log(error)
             message.error(error.message)
             setErr(error.message) 
             setSuccess(false)
-            console.log(error.response.data.message)
         }
     })
     
     return (
         <>
-            <AuthCard logo={Logo}>
+            <AuthCard logo={Logo} style='150px'>
                 <Form className='CardForm' onFinish={action} autoComplete='on' layout="vertical" encType='x-www-form-urlencoded' >
                     <Row>
                         <Col span={12}>
@@ -77,7 +77,7 @@ export default function Login() {
                         </Col>
                     </Row>
                     
-                    { err && <Alert message={err} type="error" showIcon /> }
+                    { err && <><Alert message={err} type="error" showIcon /> <br/></>}
 
                     
 

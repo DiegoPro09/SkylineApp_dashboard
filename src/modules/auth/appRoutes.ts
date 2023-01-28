@@ -4,5 +4,10 @@ export const publicRoutes = {
 }
 
 export const routesSuperAdmin ={
-    scores: '/superadmin/scores'
+    area: '/superadmin/area',
+    assignaments: '/superadmin/assignaments',
+    users: '/superadmin/users',
+    courses: '/superadmin/courses',
+    reports: '/superadmin/reports',
+    settings: '/superadmin/settings'
 }

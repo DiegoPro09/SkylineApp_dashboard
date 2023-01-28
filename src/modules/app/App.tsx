@@ -1,7 +1,7 @@
 import './App.css'
 import { Route, Routes  } from 'react-router-dom';
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './appRoutes';
-import { AppLayout } from './layout/AppLayout';
+import { AppLayout } from './layout/appLayout/AppLayout';
 import { useAuthContext } from '../auth/AuthContext';
 
 function App() {
