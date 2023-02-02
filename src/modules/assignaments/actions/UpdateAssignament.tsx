@@ -1,5 +1,5 @@
 import { EditOutlined } from '@ant-design/icons'
-import { Col, Form, Input, message, Row } from 'antd'
+import { Form, Input, message } from 'antd'
 import React, { useState } from 'react'
 import { CustomModal } from '../../../components/modal/CustomModal'
 import { Assignament } from '../../../domain/models/Assignaments'
@@ -56,13 +56,9 @@ export const UpdateAssignament:React.FC<{assignament?:Assignament}> = ({assignam
                 buttonTitle={updateAssignament} 
             > 
                 <Form layout="vertical" form={form} autoComplete='on' initialValues={assignament}>
-                    <Row>
-                        <Col span={7}>
-                        <Form.Item name="name" label={'Nombre'} tooltip={'Ingrese el nombre de la materia'} rules={assignamentValidations.name}>
-                            <Input  />
-                        </Form.Item>
-                        </Col>
-                    </Row>         
+                    <Form.Item name="name" label={'Nombre'} tooltip={'Ingrese el nombre de la materia'} rules={assignamentValidations.name}>
+                        <Input  />
+                    </Form.Item>      
                 </Form>
             </CustomModal>
         </>

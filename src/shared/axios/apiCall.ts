@@ -8,6 +8,7 @@ const apiCall = axios.create({
 })
 
 apiCall.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+apiCall.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded'
 
 export default apiCall
 
@@ -16,7 +17,7 @@ apiCall.interceptors.request.use(function (config) {
     return {
         ...config,
         headers:{
-            Authorization: `bearer ${getSessionToken()}`
+            Authorization: `${getSessionToken()}`
         }
     };
 }, function (error) {

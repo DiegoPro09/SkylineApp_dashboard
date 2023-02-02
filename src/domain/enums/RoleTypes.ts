@@ -6,4 +6,30 @@ export enum RoleTypesEnum{
     user=5
 }
 
-
+export const RoleTypes = [
+    {
+        id : 1,
+        value : RoleTypesEnum.superadmin,
+        name: 'Super Administrador'
+    },
+    {
+        id: 2,
+        value : RoleTypesEnum.admin,
+        name: 'Administrador'
+    },
+    {
+        id: 3,
+        value : RoleTypesEnum.preceptor,
+        name: 'Preceptor'
+    },
+    {
+        id: 4,
+        value : RoleTypesEnum.teacher,
+        name: 'Profesor'
+    },
+    {
+        id: 5,
+        value : RoleTypesEnum.user,
+        name: 'Alumno'
+    }
+]

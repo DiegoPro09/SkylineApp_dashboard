@@ -12,10 +12,11 @@ interface customModalProps{
     icon: React.ReactNode, 
     error?:string,
     buttonTitle: string,
-    onClose?:()=>void
+    onClose?:()=>void,
+    divider?:boolean
 } 
 
-export const CustomModal:React.FC<customModalProps> = ({action, onClose, disabled, closeOn, isLoading, children, title, tooltiptitle, icon, error ,buttonTitle}) => {
+export const CustomModal:React.FC<customModalProps> = ({action, onClose, disabled, closeOn, isLoading, children, title, tooltiptitle, icon, error ,buttonTitle, divider}) => {
 
     const [modal,setModal] = useState(false)
 
@@ -38,24 +39,24 @@ export const CustomModal:React.FC<customModalProps> = ({action, onClose, disable
     
     return (
         <>
-        <Tooltip title={tooltiptitle} placement="bottomRight">
-            <Button disabled={disabled} shape="circle" icon={icon} onClick={openModal} style={{marginRight: '5px'}}/>
-        </Tooltip>
+            <Tooltip title={tooltiptitle} placement="bottomRight">
+                <Button disabled={disabled} shape="circle" icon={icon} onClick={openModal} style={{marginRight: '5px'}}/>
+            </Tooltip>
 
-        <Modal
-            title = {title}
-            open={modal} 
-            onCancel={closeModal} 
-            okText={buttonTitle} 
-            destroyOnClose 
-            centered 
-            onOk={handleOk} 
-            confirmLoading={isLoading}
-        >   
-            <Divider />
-            {children}
-            {error && <Alert message={error} type="error" showIcon /> }
-        </Modal>
+            <Modal
+                title = {title}
+                open={modal} 
+                onCancel={closeModal} 
+                okText={buttonTitle} 
+                destroyOnClose 
+                centered 
+                onOk={handleOk} 
+                confirmLoading={isLoading}
+            >   
+                {divider ? <Divider /> : ''}
+                {children}
+                {error && <Alert message={error} type="error" showIcon /> }
+            </Modal>
         </>
     )
 }

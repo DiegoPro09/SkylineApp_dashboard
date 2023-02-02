@@ -4,7 +4,7 @@ import { Card, Col, Image, Row } from 'antd'
 import React, { ReactNode } from 'react'
 import "./CardStyle.css"
 
-const AuthCard:React.FC<{children:ReactNode, logo:string, style:string}> = ({children, logo, style}) => {
+const AuthCard:React.FC<{children:ReactNode, logo?:string, style?:string}> = ({children, logo, style}) => {
     return (
         <Card
             title={

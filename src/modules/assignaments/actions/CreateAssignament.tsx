@@ -1,5 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Col, Form, Input, message, Row } from "antd";
+import { Form, Input, message } from "antd";
 import { useState } from "react"
 import { CustomModal } from "../../../components/modal/CustomModal";
 import { Assignament } from "../../../domain/models/Assignaments";
@@ -60,13 +60,9 @@ export const CreateAssignament:React.FC = () => {
                 buttonTitle={'Crear'} 
             >
                 <Form form={form} layout="vertical" autoComplete='on'>
-                    <Row>
-                        <Col span={10}>
-                            <Form.Item name="name" label={'Nombre'} tooltip={nameTitle} rules={assignamentValidations.name}>
-                                <Input placeholder={nameTitle}/>
-                            </Form.Item>
-                        </Col> 
-                    </Row>
+                    <Form.Item name="name" label={'Nombre'} tooltip={nameTitle} rules={assignamentValidations.name}>
+                        <Input placeholder={nameTitle}/>
+                    </Form.Item>
                 </Form>
             </CustomModal>
         </>
