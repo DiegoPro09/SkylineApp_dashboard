@@ -14,6 +14,5 @@ export interface createReq {
 }
 
 export const createUserService = (data:createReq) =>{
-    console.log(data)
     return apiCall.post<any>('user/create', data)
 }

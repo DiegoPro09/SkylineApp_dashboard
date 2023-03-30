@@ -6,10 +6,6 @@ export const validations:{[fieldName:string]:Rule[]} = {
         {
             required: true,
             message: 'Required name',
-        },
-        {
-            pattern:regExp.name,
-            message:'Nombre no valido'
         }
     ],
     
@@ -134,6 +130,18 @@ export const validations:{[fieldName:string]:Rule[]} = {
         {
             required:true,
             message:'Debe ingresar el teléfono fijo'
+        },
+    ],
+    number:[
+        {
+            required:true,
+            message:'Debe ingresar el número'
+        },
+    ],
+    year:[
+        {
+            required:true,
+            message:'Debe ingresar el año'
         },
     ],
 }

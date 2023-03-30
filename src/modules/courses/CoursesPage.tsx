@@ -1,24 +1,76 @@
-import { useLocation } from "react-router-dom"
+import { Skeleton, Tabs } from 'antd'
+import { useState } from 'react'
+import Table from "../../components/table/CustomTable"
+import { Course } from "../../domain/models/Course"
 import { AppContent } from "../app/layout/appContent/AppContent"
-import { useAuthContext } from "../auth/AuthContext"
-import { useUserById } from "../users/cache/hooks/usUserById"
-
+import { CreateCourse } from "./actions/CreateCourse"
+import { CreateCourseLevelDivision } from './actions/CreateCourseLevelDivision'
+import { DeleteCourse } from './actions/DeleteCourse'
+import { UpdateCourse } from './actions/UpdateCourse'
+import { useAllCac } from './cache/hooks/useAllCourseAssignament'
+import { useAllCld } from './cache/hooks/useAllCourseLevelDivisions'
+import { useAllCourses } from "./cache/hooks/useAllCourses"
+import { useCourseById } from './cache/hooks/useCourseById'
+import { caColumns, cldColumns, courseColumns, courseDivisionColumns } from "./CourseColumns"
 
 function CoursesPage() {
 
-    const { loggedUser } = useAuthContext()
-    const { data:user, isLoading } = useUserById(loggedUser?.id)
+    const columns = courseColumns 
+    const { data: courses, isLoading} = useAllCourses()
+    const { data: cld} = useAllCld()
+    const { data: cac} = useAllCac()
 
-    const location = useLocation()
+    const [selectedCourseId, setSelectedCourse] = useState<Course['id']>('')
+    const selectedCourse = courses?.find((Course)=>Course.id === selectedCourseId) 
 
-    const { pathname } = location
-    const pathnames = pathname.split('/').filter((item) => item)
-
-    
     return (
-        <AppContent firstname={user?.first_name} lastname={user?.last_name} title={pathnames[1].toUpperCase()}>
+        <AppContent title={'Cursos'}>
             <div>
-                CoursesPage
+                <Tabs type="card" >
+                    <Tabs.TabPane tab={'Cursos'} key={'1'}>
+                        {isLoading ? <Skeleton /> :
+                        <>
+                            <div>
+                                <UpdateCourse course={selectedCourse} key={selectedCourseId} />,
+                                <DeleteCourse course={selectedCourse?.id}/>,
+                                <CreateCourse />,
+                            </div>
+                            <Table
+                                columns={columns}
+                                data={courses}
+                                isLoading={isLoading}
+                                setSelected={setSelectedCourse}
+                                singleSelection
+                            />
+                        </>}
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab={'Curso - Division'} key={'2'}>
+                        {isLoading ? <Skeleton /> :
+                        <>
+                            <div>
+                                <CreateCourseLevelDivision />
+                            </div>
+                            <Table
+                                columns={cldColumns}
+                                data={courseDivisionColumns(cld)}
+                                isLoading={isLoading}
+                                setSelected={setSelectedCourse}
+                                singleSelection
+                            />
+                        </>}
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab={'Cursos - Materias'} key={'3'}>
+                        {isLoading ? <Skeleton /> :
+                        <Table
+                            columns={columns}
+                            data={caColumns(cac)}
+                            isLoading={isLoading}
+                            setSelected={setSelectedCourse}
+                            singleSelection
+                        />}
+                    </Tabs.TabPane>
+                </Tabs>
+                
             </div>
         </AppContent>
     )

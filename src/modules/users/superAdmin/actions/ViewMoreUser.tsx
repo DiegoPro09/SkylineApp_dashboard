@@ -1,4 +1,4 @@
-import { EditOutlined } from "@ant-design/icons"
+import { EditOutlined, EyeOutlined } from "@ant-design/icons"
 import { Col, DatePicker, Form, Input, message, Row, Tabs } from "antd"
 import { useState } from "react"
 import InputPassword from "../../../../components/inputs/InputPassword"
@@ -13,7 +13,7 @@ import SelectUserGenre from "../components/SelectUserGenre"
 import SelectUserRole from "../components/SelectUserRole"
 import SelectUserState from "../components/SelectUserState"
 
-export const UpdateUser:React.FC<{user?:User}>= ({user}) => {
+export const ViewMoreUser:React.FC<{user?:User}>= ({user}) => {
 
     const labels = {
         firstname: <div >Nombre</div>,
@@ -30,192 +30,129 @@ export const UpdateUser:React.FC<{user?:User}>= ({user}) => {
     const canUpdate = !!user
     const updateUser = 'Actualizar Usuario'
 
-    const [err, setErr] = useState("")
-    const [disabledPassword, setDisabledPassword] = useState(true);
-    const [form] = Form.useForm();
-    const [stateUser, setStateUser] = useState()
-    const [userRole, setUserRole] = useState()
-    const [userGenre, setUserGenre] = useState()
-    const [userInscription, setUserInscription] = useState('')
-    const [userBirthday, setUserBirthday] = useState('')
-
-
-
-    const toggle = () => {
-        setDisabledPassword(!disabledPassword);
-    };
-
-    //Actualiza los datos en la DB
-    const {action, isLoading, isSuccess} = useAction({
-        key:'update',
-        fn:(userData)=> updateAnyUserService(user?.id, userData),
-        onSuccess:(res)=>{
-            message.success('Usuario Actualizado!')
-            ReactQueryClient.invalidateQueries(userCacheKeys.all())
-        },
-        onError:(error)=>{
-            message.error(error.message)
-            setErr(error.message) 
-        }
-    })
-
-    const onChangeI = (date:any, dateString:any) => {
-        setUserInscription(dateString)
-    };
-
-    const onChangeB = (date:any, dateString:any) => {
-        setUserBirthday(dateString)
-    };
-
-    //Action que manda los datos al modal
-    const handleAction = () => {
-        //validamos los campos antes de mandar el formulario
-        form.validateFields()
-        .then((data)=>{
-            user?.role_id === 5 ? 
-                action({
-                    ...data,
-                    state: stateUser,
-                    role_id: userRole,
-                    genre_id: userGenre,
-                    inscription_date: userInscription,
-                    birthday_date: userBirthday
-                })
-            :
-                action({
-                    ...data,
-                    state: stateUser,
-                    role_id: userRole
-                });
-        })
-    }
-
     return (
         <>
         
             <CustomModal 
+                action={()=>console.log('hola')}
                 disabled={!canUpdate}
-                error={err}
-                closeOn={isSuccess}
-                action={handleAction} 
                 title={updateUser}
                 tooltiptitle={canUpdate ? updateUser : 'Debe seleccionar un usuario' }
-                icon={<EditOutlined/>} 
-                isLoading={isLoading} 
+                icon={<EyeOutlined/>} 
                 buttonTitle={updateUser} 
             > 
                 
 
                 <Tabs type="card">
                     <Tabs.TabPane closable={false} tab={'Datos del usuario'} key="0">
-                        <Form layout="vertical" form={form} autoComplete='on' initialValues={user}>
+                        <Form layout="vertical"autoComplete='on' initialValues={user}>
                             <Row>
                                 <Col span={12}>
                                     <Form.Item name='first_name' label={labels.firstname} tooltip="Debe ingresar su nombre" rules={validations.name}>
-                                        <Input placeholder="Ingrese su nombre" />
+                                        <Input placeholder="Ingrese su nombre"  disabled={true}/>
                                     </Form.Item>
                                 </Col>
                                 <Col span={1}></Col>
                                 <Col span={11}>
                                     <Form.Item name='last_name' label={labels.lastname} tooltip="Debe ingresar su nombre" rules={validations.name}>
-                                        <Input placeholder="Ingrese su apellido" />
+                                        <Input placeholder="Ingrese su apellido"  disabled={true}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col span={12}>
                                     <Form.Item name='email' label={labels.email} tooltip="Debe ingresar su email" rules={validations.email}>
-                                        <Input placeholder="Ingrese su email" />
+                                        <Input placeholder="Ingrese su email"  disabled={true}/>
                                     </Form.Item>
                                 </Col>
                                 <Col span={1}></Col>
                                 <Col span={5}>
                                     <Form.Item name='dni' label={labels.dni} tooltip="Debe ingresar su dni" rules={validations.dni}>
-                                        <Input placeholder="Ingrese su dni" />
+                                        <Input placeholder="Ingrese su dni"  disabled={true}/>
                                     </Form.Item>
                                 </Col>
                                 <Col span={1}></Col>
                                 <Col span={5}>
                                     <Form.Item name='phone' label={labels.phone} tooltip="Debe ingresar su número de teléfono" rules={validations.phone}>
-                                        <Input placeholder="Ingrese su número de teléfono" />
+                                        <Input placeholder="Ingrese su número de teléfono"  disabled={true}/>
                                     </Form.Item>
                                 </Col>
                             </Row>       
                             <Row>
                                 <Col span={12}>
-                                    <SelectUserRole role={user?.role_id} onChange={setUserRole}/>
+                                    <SelectUserRole role={user?.role_id} onChange={()=>console.log('asd')}/>
                                 </Col>
                                 <Col span={1}></Col>
                                 <Col span={11}>
-                                    <SelectUserState state={user?.state} onChange={setStateUser} />
+                                    <SelectUserState state={user?.state} onChange={()=>console.log('asd')}/>
                                 </Col>
                             </Row><br/>
                             <InputPassword />        
                         </Form>
                     </Tabs.TabPane>
-                    { user && user.role_id > 4 && 
+                    { user?.role_id === 5 || user?.role_id === 6 && 
                         <Tabs.TabPane tab={'Datos personales'} key='1'>
-                            <Form layout="vertical" form={form} autoComplete='on' initialValues={user}>
+                            <Form layout="vertical" autoComplete='on' initialValues={user}>
                                 <Row>
                                     <Col span={12}>
                                         <Form.Item name='book' label='Libro' tooltip="Debe ingresar número de libro" rules={validations.book}>
-                                            <Input placeholder="Ingrese el número de libro" />
+                                            <Input placeholder="Ingrese el número de libro"  disabled={true}/>
                                         </Form.Item>
                                     </Col>
                                     <Col span={1}></Col>
                                     <Col span={11}>
                                         <Form.Item name='invoice' label='Folio' tooltip="Debe ingresar el número de folio" rules={validations.invoice}>
-                                            <Input placeholder="Ingrese el número de folio" />
+                                            <Input placeholder="Ingrese el número de folio"  disabled={true}/>
                                         </Form.Item>
                                     </Col>
                                 </Row>  
                                 <Row>
                                     <Col span={24}>
                                         <Form.Item name='adress' label='Domicilio' tooltip="Debe ingresar el domicilio" rules={validations.address}>
-                                            <Input placeholder="Ingrese el domicilio" />
+                                            <Input placeholder="Ingrese el domicilio" disabled={true} />
                                         </Form.Item>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col span={12}>
                                         <Form.Item name='inscription_date' label='Fecha de inscripción' tooltip="Debe ingresar la fecha de inscripción" rules={validations.inscription_date}>
-                                            <DatePicker placeholder="Ingrese la fecha de inscripción" style={{width: '100%'}} onChange={onChangeI} />
+                                            <DatePicker placeholder="Ingrese la fecha de inscripción" style={{width: '100%'}}  disabled={true}/>
                                         </Form.Item>
                                     </Col>
                                     <Col span={1}></Col>
                                     <Col span={11}>
                                         <Form.Item name='birthday_date' label='Fecha de nacimiento' tooltip="Debe ingresar la fecha de nacimiento" rules={validations.birthday_date}>
-                                            <DatePicker placeholder="Ingrese la fecha de nacimiento" style={{width: '100%'}} onChange={onChangeB}/>
+                                            <DatePicker placeholder="Ingrese la fecha de nacimiento" style={{width: '100%'}} disabled={true}/>
                                         </Form.Item>
                                     </Col>
                                 </Row>     
                                 <Row>
                                     <Col span={8}>
                                         <Form.Item name='place_of_birth' label='Lugar de nacimiento' tooltip="Debe ingresar el lugar de nacimiento" rules={validations.place_of_birth}>
-                                            <Input placeholder="Ingrese el lugar de nacimiento" />
+                                            <Input placeholder="Ingrese el lugar de nacimiento"  disabled={true}/>
                                         </Form.Item>
                                     </Col>
                                     <Col span={1}></Col>
                                     <Col span={7}>
                                         <Form.Item name='province' label='Provincia' tooltip="Debe ingresar la provincia" rules={validations.province}>
-                                            <Input placeholder="Ingrese la provincia" />
+                                            <Input placeholder="Ingrese la provincia" disabled={true} />
                                         </Form.Item>
                                     </Col>
                                     <Col span={1}></Col>
                                     <Col span={7}>
                                         <Form.Item name='nacionality' label='Nacionalidad' tooltip="Debe ingresar la nacionalidad" rules={validations.nacionality}>
-                                            <Input placeholder="Ingrese la nacionalidad" />
+                                            <Input placeholder="Ingrese la nacionalidad"  disabled={true}/>
                                         </Form.Item>
                                     </Col>
                                 </Row>   
                                 <Row>
                                     <Col span={12}>
-                                        <SelectUserGenre onChange={setUserGenre}/>
+                                        <SelectUserGenre onChange={()=>console.log('asd')} />
                                     </Col>
                                     <Col span={1}></Col>
                                     <Col span={11}>
                                         <Form.Item name='fixed_phone' label='Teléfono fijo' tooltip="Debe ingresar el teléfono fijo" rules={validations.fixed_phone}>
-                                            <Input placeholder="Ingrese el teléfono fijo" />
+                                            <Input placeholder="Ingrese el teléfono fijo"  disabled={true}/>
                                         </Form.Item>
                                     </Col>
                                 </Row>

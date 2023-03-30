@@ -3,7 +3,8 @@ export enum RoleTypesEnum{
     admin=2,
     preceptor=3,
     teacher=4,
-    user=5
+    student=5,
+    tutor=6
 }
 
 export const RoleTypes = [
@@ -29,7 +30,12 @@ export const RoleTypes = [
     },
     {
         id: 5,
-        value : RoleTypesEnum.user,
+        value : RoleTypesEnum.student,
         name: 'Alumno'
+    },
+    {
+        id: 6,
+        value : RoleTypesEnum.tutor,
+        name: 'Tutor'
     }
 ]

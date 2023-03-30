@@ -77,7 +77,7 @@ export const CreateUser:React.FC = () => {
                 isLoading={isLoading} 
                 buttonTitle={'Añadir'}
             >
-                <Form form={form} layout="vertical" autoComplete='on' initialValues={{state: false, role: RoleTypesEnum.user}}>
+                <Form form={form} layout="vertical" autoComplete='on' initialValues={{state: false, role: RoleTypesEnum.student}}>
                     <Row>
                         <Col span={12}>
                             <Form.Item name='first_name' label={labels.firstname} tooltip="Debe ingresar su nombre" rules={validations.name}>

@@ -99,7 +99,7 @@ export const AuthProvider:React.FC<{children:React.ReactNode}> = ({children})=>{
             user.role_id === RoleTypesEnum.admin ? navifate(`/signup`) : 
             user.role_id === RoleTypesEnum.preceptor ? navifate(`/signup`) : 
             user.role_id === RoleTypesEnum.teacher ? navifate(`/signup`) : 
-            user.role_id === RoleTypesEnum.user ? navifate(`/signup`) : 
+            user.role_id === RoleTypesEnum.student ? navifate(`/signup`) : 
             navifate(publicRoutes.login)
         }
         

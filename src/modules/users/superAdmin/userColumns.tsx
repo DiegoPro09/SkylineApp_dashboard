@@ -44,7 +44,7 @@ export const usersColumns:ColumnsType<User> = [
         dataIndex: 'role_id',
         key: 'role_id',
         render:(role_id)=><Text>{
-            role_id === RoleTypesEnum.superadmin ? "Super Administrador" : role_id === RoleTypesEnum.admin ? "Administrador"  : role_id === RoleTypesEnum.preceptor ? "Preceptor"  : role_id === RoleTypesEnum.teacher ? "Profesor"  : 'Alumno'
+            role_id === RoleTypesEnum.superadmin ? "Super Administrador" : role_id === RoleTypesEnum.admin ? "Administrador"  : role_id === RoleTypesEnum.preceptor ? "Preceptor"  : role_id === RoleTypesEnum.teacher ? "Profesor"  : role_id === RoleTypesEnum.tutor ? 'Tutor' : 'Alumno'
         }</Text>
     },
     {

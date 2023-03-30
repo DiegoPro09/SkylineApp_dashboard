@@ -5,7 +5,7 @@ interface customModalProps{
     disabled?:boolean
     action: () => any,
     closeOn?:boolean
-    isLoading: boolean, 
+    isLoading?: boolean, 
     children: React.ReactNode, 
     title: string, 
     tooltiptitle: string, 
@@ -13,10 +13,11 @@ interface customModalProps{
     error?:string,
     buttonTitle: string,
     onClose?:()=>void,
-    divider?:boolean
+    divider?:boolean,
+    shape?:string,
 } 
 
-export const CustomModal:React.FC<customModalProps> = ({action, onClose, disabled, closeOn, isLoading, children, title, tooltiptitle, icon, error ,buttonTitle, divider}) => {
+export const CustomModal:React.FC<customModalProps> = ({action, onClose, disabled, closeOn, isLoading, children, title, tooltiptitle, icon, error ,buttonTitle, divider, shape}) => {
 
     const [modal,setModal] = useState(false)
 
@@ -40,7 +41,9 @@ export const CustomModal:React.FC<customModalProps> = ({action, onClose, disable
     return (
         <>
             <Tooltip title={tooltiptitle} placement="bottomRight">
-                <Button disabled={disabled} shape="circle" icon={icon} onClick={openModal} style={{marginRight: '5px'}}/>
+                <Button disabled={disabled} shape={shape === 'default' ? 'default' : 'circle'} icon={icon} onClick={openModal} style={{marginRight: '5px'}}>
+                    {buttonTitle ? buttonTitle : ''}
+                </Button>
             </Tooltip>
 
             <Modal
@@ -53,7 +56,7 @@ export const CustomModal:React.FC<customModalProps> = ({action, onClose, disable
                 onOk={handleOk} 
                 confirmLoading={isLoading}
             >   
-                {divider ? <Divider /> : ''}
+                <Divider />
                 {children}
                 {error && <Alert message={error} type="error" showIcon /> }
             </Modal>
