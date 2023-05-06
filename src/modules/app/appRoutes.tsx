@@ -1,6 +1,9 @@
 import { Button } from "antd"
 import axios from "axios"
-import SignUp from "../auth/actions/SignUp"
+import Login from "../auth/actions/login/Login"
+import SignUp from "../auth/actions/signup/SignUp"
+import { publicRoutes } from "../auth/appRoutes"
+import { superadminRoutes } from "../users/userRoutes"
 
 export interface AppRoutes {
     path:string,
@@ -9,26 +12,24 @@ export interface AppRoutes {
     icon?:React.ReactNode
 }
 
-const whow = () =>{
-    axios.get('http://localhost:8000/api/user')
-        .then(function(response){
-            console.log(response.data.users)
-        })
-}
-
 export const PUBLIC_ROUTES:AppRoutes[] = [
     {
         path:'/',
         name:'Login',
-        component:<>
-
-            <Button onClick={whow}>asd</Button>
-
-        </>
+        component: <Login/>
     },
     {
-        path:'/signup',
+        path: publicRoutes.login,
+        name:'Login',
+        component: <Login/>
+    },
+    {
+        path: publicRoutes.signup,
         name:'Signup',
         component:<SignUp/>
     },
+]
+
+export const PRIVATE_ROUTES:AppRoutes[] = [
+    ...superadminRoutes
 ]

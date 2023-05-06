@@ -1,7 +1,7 @@
 import { RoleTypesEnum } from "../enums/RoleTypes";
 
 export interface User{
-    id?:string,
+    id:string,
     first_name:string,
     last_name:string,
     dni:string,
@@ -11,5 +11,5 @@ export interface User{
     question:string,
     answer:string,
     state:boolean,
-    role: RoleTypesEnum
+    role_id: RoleTypesEnum
 }
