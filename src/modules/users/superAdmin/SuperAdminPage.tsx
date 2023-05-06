@@ -48,15 +48,7 @@ function SuperAdminPage() {
           <Tabs type="card" >
             {RoleTypes.map((tabInfo, index) =>{ 
               return(
-                <Tabs.TabPane tab={tabInfo.name !== 'Alumno' ? tabInfo.name+'/es' : tabInfo.name+'/s'} key={tabInfo.id}>
-                  <Table
-                    columns={columns}
-                    data={selectUserRole(tabInfo.id)}
-                    isLoading={isLoading}
-                    setSelected={setSelectedUser}
-                    singleSelection
-                  />
-                </Tabs.TabPane> 
+                <>asd</>
               )
             })}
           </Tabs>
